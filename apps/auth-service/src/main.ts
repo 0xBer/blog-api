@@ -11,6 +11,7 @@ async function bootstrap() {
 			AuthServiceModule,
 			{
 				transport: Transport.KAFKA,
+				options: {},
 			},
 		);
 	await app.listen();
