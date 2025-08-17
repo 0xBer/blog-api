@@ -8,9 +8,26 @@ import { AuthService } from './services/auth.service';
 import { PostController } from './controllers/post.controller';
 import { PostService } from './services/post.service';
 import { NextFunction, Request, Response } from 'express';
+import {
+	ClientsModule,
+	Transport,
+} from '@nestjs/microservices';
 
 @Module({
-	imports: [],
+	imports: [
+		ClientsModule.register([
+			{
+				name: 'AUTH_SERVICE',
+				transport: Transport.KAFKA,
+				options: {
+					client: {
+						clientId: 'auth',
+						brokers: ['localhost:9092'],
+					},
+				},
+			},
+		]),
+	],
 	controllers: [AuthController, PostController],
 	providers: [AuthService, PostService],
 })
