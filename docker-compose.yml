@@ -1,0 +1,4 @@
+services:
+    kafka: image
+    kafdrop:
+        image: obsidiandynamics/kafdrop
