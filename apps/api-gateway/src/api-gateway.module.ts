@@ -17,12 +17,15 @@ import {
 	imports: [
 		ClientsModule.register([
 			{
-				name: 'AUTH_SERVICE',
+				name: 'KAFKA_SERVICE',
 				transport: Transport.KAFKA,
 				options: {
 					client: {
-						clientId: 'auth',
-						brokers: ['localhost:9092'],
+						clientId: 'api-gateway',
+						brokers: ['localhost:9094'],
+					},
+					consumer: {
+						groupId: 'api-gateway-consumer',
 					},
 				},
 			},

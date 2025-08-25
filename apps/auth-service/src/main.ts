@@ -13,14 +13,16 @@ async function bootstrap() {
 				transport: Transport.KAFKA,
 				options: {
 					client: {
-						brokers: ['localhost:9092'],
+						clientId: 'auth-service',
+						brokers: ['localhost:9094'],
 					},
 					consumer: {
-						groupId: 'auth',
+						groupId: 'auth-consumer',
 					},
 				},
 			},
 		);
+
 	await app.listen();
 }
 bootstrap();
