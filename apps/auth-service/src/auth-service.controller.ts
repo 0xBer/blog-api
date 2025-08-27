@@ -4,6 +4,7 @@ import {
 	MessagePattern,
 	Payload,
 } from '@nestjs/microservices';
+import { AuthDto } from '@app/shared';
 
 @Controller()
 export class AuthServiceController {
@@ -12,17 +13,12 @@ export class AuthServiceController {
 	) {}
 
 	@MessagePattern('register')
-	async register(@Payload() data: any) {
-		return this.authServiceService.register(data);
+	async register(@Payload() dto: AuthDto) {
+		return this.authServiceService.register(dto);
 	}
 
 	@MessagePattern('login')
-	async login() {
-		return this.authServiceService.login();
-	}
-
-	@MessagePattern('logout')
-	async logout() {
-		return this.authServiceService.logout();
+	async login(@Payload() dto: AuthDto) {
+		return this.authServiceService.login(dto);
 	}
 }

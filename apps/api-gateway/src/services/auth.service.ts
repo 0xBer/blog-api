@@ -1,10 +1,11 @@
+import { AuthDto } from '@app/shared';
 import {
 	Inject,
 	Injectable,
 	OnModuleInit,
 } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { lastValueFrom } from 'rxjs';
+import { last, lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class AuthService implements OnModuleInit {
@@ -20,20 +21,21 @@ export class AuthService implements OnModuleInit {
 		await this.client.connect();
 	}
 
-	async register(user: {
-		name: string;
-		password: string;
-	}) {
+	async register(dto: AuthDto) {
+		const data = lastValueFrom(
+			this.client.send('register', dto),
+		);
+
+		return data;
+	}
+
+	async login(dto: AuthDto) {
 		return await lastValueFrom(
-			this.client.send('register', user),
+			this.client.send('login', dto),
 		);
 	}
 
-	async login() {
-		return { message: 'Login' };
-	}
-
 	async logout() {
-		return { message: 'Logout' };
+		return 'Loged out';
 	}
 }

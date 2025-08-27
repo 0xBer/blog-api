@@ -1,3 +1,4 @@
+import { AuthDto } from '@app/shared';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
@@ -8,15 +9,11 @@ export class AuthServiceService {
 		private readonly client: ClientKafka,
 	) {}
 
-	async register(data: any) {
-		return data;
+	async register(dto: AuthDto) {
+		return dto;
 	}
 
-	async login() {
-		return 'Loged in';
-	}
-
-	async logout() {
-		return 'Loged out';
+	async login(dto: AuthDto) {
+		return dto;
 	}
 }
