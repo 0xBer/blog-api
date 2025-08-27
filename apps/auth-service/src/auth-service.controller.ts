@@ -1,6 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { AuthServiceService } from './auth-service.service';
 import {
+	Ctx,
+	KafkaContext,
 	MessagePattern,
 	Payload,
 } from '@nestjs/microservices';
@@ -18,7 +20,10 @@ export class AuthServiceController {
 	}
 
 	@MessagePattern('login')
-	async login(@Payload() dto: AuthDto) {
-		return this.authServiceService.login(dto);
+	async login(
+		@Payload() dto: AuthDto,
+		@Ctx() ctx: KafkaContext,
+	) {
+		return this.authServiceService.login(dto, ctx);
 	}
 }

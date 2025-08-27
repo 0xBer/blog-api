@@ -1,6 +1,9 @@
 import { AuthDto } from '@app/shared';
 import { Inject, Injectable } from '@nestjs/common';
-import { ClientKafka } from '@nestjs/microservices';
+import {
+	ClientKafka,
+	KafkaContext,
+} from '@nestjs/microservices';
 
 @Injectable()
 export class AuthServiceService {
@@ -13,7 +16,11 @@ export class AuthServiceService {
 		return dto;
 	}
 
-	async login(dto: AuthDto) {
-		return dto;
+	async login(dto: AuthDto, ctx: KafkaContext) {
+		const message = ctx.getMessage();
+		const headers = message.headers;
+		const token = headers?.Authorization?.toString();
+
+		return { dto, token };
 	}
 }
