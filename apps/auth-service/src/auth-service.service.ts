@@ -16,11 +16,7 @@ export class AuthServiceService {
 		return dto;
 	}
 
-	async login(dto: AuthDto, ctx: KafkaContext) {
-		const message = ctx.getMessage();
-		const headers = message.headers;
-		const token = headers?.Authorization?.toString();
-
-		return { dto, token };
+	async login(dto: AuthDto) {
+		return dto;
 	}
 }

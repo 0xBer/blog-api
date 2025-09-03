@@ -20,10 +20,7 @@ export class AuthServiceController {
 	}
 
 	@MessagePattern('login')
-	async login(
-		@Payload() dto: AuthDto,
-		@Ctx() ctx: KafkaContext,
-	) {
-		return this.authServiceService.login(dto, ctx);
+	async login(@Payload() dto: AuthDto) {
+		return this.authServiceService.login(dto);
 	}
 }

@@ -31,12 +31,13 @@ export class AuthService implements OnModuleInit {
 
 	async login(dto: AuthDto) {
 		const jwt = 'test.token.ms';
-		return await lastValueFrom(
-			this.client.send('login', {
-				value: dto,
-				headers: { Authorization: `Bearer ${jwt}` },
-			}),
-		);
+
+		// return await lastValueFrom(
+		// 	this.client.send('login', {
+		// 		value: dto,
+		// 		headers: { Authorization: `Bearer ${jwt}` },
+		// 	}),
+		// );
 
 		// return await lastValueFrom(
 		// 	this.client.send('login', dto),
