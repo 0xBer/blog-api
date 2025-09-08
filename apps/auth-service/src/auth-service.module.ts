@@ -5,6 +5,7 @@ import {
 	ClientsModule,
 	Transport,
 } from '@nestjs/microservices';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
 	imports: [
@@ -23,6 +24,7 @@ import {
 				},
 			},
 		]),
+		JwtModule,
 	],
 	controllers: [AuthServiceController],
 	providers: [AuthServiceService],
