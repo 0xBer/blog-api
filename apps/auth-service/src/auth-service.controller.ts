@@ -16,7 +16,7 @@ export class AuthServiceController {
 
 	@MessagePattern('register')
 	async register(@Payload() dto: AuthDto) {
-		return this.authServiceService.register(dto);
+		return await this.authServiceService.register(dto);
 	}
 
 	@MessagePattern('login')

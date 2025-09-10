@@ -5,7 +5,7 @@ import {
 	OnModuleInit,
 } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { last, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class AuthService implements OnModuleInit {
@@ -22,7 +22,7 @@ export class AuthService implements OnModuleInit {
 	}
 
 	async register(dto: AuthDto) {
-		const data = lastValueFrom(
+		const data = await lastValueFrom(
 			this.client.send('register', dto),
 		);
 

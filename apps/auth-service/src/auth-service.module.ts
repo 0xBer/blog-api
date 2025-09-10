@@ -6,6 +6,7 @@ import {
 	Transport,
 } from '@nestjs/microservices';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
 	imports: [
@@ -24,7 +25,10 @@ import { JwtModule } from '@nestjs/jwt';
 				},
 			},
 		]),
-		JwtModule,
+		JwtModule.register({}),
+		ConfigModule.forRoot({
+			isGlobal: true,
+		}),
 	],
 	controllers: [AuthServiceController],
 	providers: [AuthServiceService],

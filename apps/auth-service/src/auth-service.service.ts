@@ -1,21 +1,18 @@
 import { AuthDto } from '@app/shared';
 import { Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import {
-	ClientKafka,
-	KafkaContext,
-} from '@nestjs/microservices';
 
 @Injectable()
 export class AuthServiceService {
 	constructor(
 		@Inject('KAFKA_SERVICE')
-		private readonly client: ClientKafka,
 		private jwtService: JwtService,
+		private configService: ConfigService,
 	) {}
 
 	async register(dto: AuthDto) {
-		const token = await this.signToken(dto);
+		const token = this.signToken(dto);
 		return token;
 	}
 
@@ -28,7 +25,9 @@ export class AuthServiceService {
 			access_token: await this.jwtService.signAsync(
 				payload,
 				{
-					secret: 'asd',
+					secret: this.configService.get<string>(
+						'JWT_SECRET',
+					),
 					expiresIn: 60 * 60 * 2,
 				},
 			),

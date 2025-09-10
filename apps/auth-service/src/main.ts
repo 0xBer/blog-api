@@ -17,7 +17,7 @@ async function bootstrap() {
 						brokers: ['localhost:9094'],
 					},
 					consumer: {
-						groupId: 'auth-consumer',
+						groupId: 'auth-service-consumer',
 					},
 				},
 			},
